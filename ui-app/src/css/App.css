@@ -1,0 +1,123 @@
+@import url("variables.css");
+
+/* Typography*/
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter, sans-serif";
+  background-color: var(--color-neutral-90);
+  color: var(--color-neutral-20);
+  font-size: 16px;
+}
+
+.header {
+  background-color:var(--color-brand);
+  font-size: var(--fs-rg);
+  position: sticky;
+  top: 0;
+}
+
+.header-title {
+  font-size: var(--fs-md);
+  margin: 0,0,0,0;
+  padding: 0.6rem, 1rem;
+  color: var(--color-neutral-80);
+}
+
+.list-book {
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 1rem;
+  
+}
+
+.book {
+  width: 16rem;
+  max-width: 1200px;
+  border: solid 1px var(--color-neutral-40);
+  border-radius: 1rem;
+  padding: 0.6rem 1rem;
+  background-color: var(--color-neutral-80);
+}
+.book-title {
+  color: var(--color-neutral-10); 
+}
+
+.book:hover {
+  border-width: 3px;
+  border-color: var(--color-neutral-50);
+  transform: scale(1.05);
+  transition: all 0.32 ease-in-out;
+}
+
+.book-cover {
+  width: 100%;
+  height: auto;
+}
+.book-desc {
+  font-size: var(--fs-sm);
+}
+
+/* outer div of book detail */
+.book-details {
+  width: 100%;
+  height: auto;
+  display: flex;  
+  justify-content: center;
+  flex-direction: row;
+}
+
+.book-detail {
+  width: 500px;
+  justify-content: center;
+  padding: 2rem;
+  border: 1px solid green;
+}
+
+.book-cover {
+  width: 400px;
+  border: 1px solid yellow;
+  padding: 2rem;
+}
+
+.cover-image {
+  border-radius: 10px;
+}
+
+.book-detail .book-title {
+  font-size: var(--fs-lg);
+  color: var(--color-neutral-10);
+  margin-bottom: 0.5rem;
+}
+
+.lighter-text {
+  color: var(--color-neutral-40)
+}
+
+.book-author {
+  color: var(--color-neutral-40);
+  font-size: 1.2rem; 
+  margin-left: 8px;
+}
+
+.rating {
+  color: var(--color-neutral-30);
+  padding: 8px;
+}
+
+hr {
+  border-color: var(--color-neutral-70);
+}
+
+.isbn, .pages {
+  color: var(--color-neutral-50);
+  padding: 4px;
+  font-size: var(--fs-sm);
+}
+
+.book-description {
+  color: var(--color-neutral-50);
+  font-size: var(--fs-rg);
+}
