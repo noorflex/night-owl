@@ -1,1 +1,4 @@
 ui-app/node_modules/**
+
+# Local Netlify folder
+.netlify
