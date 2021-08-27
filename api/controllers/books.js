@@ -16,7 +16,7 @@ const getAllBooks = (request, response) => {
         if (err) {
             response.status(500).json(err);
         } else {
-            response.status(res.statusCode).json(res);
+            response.status(res.statusCode).json(res.data);
         }
     });
 }
@@ -28,7 +28,7 @@ const getBooksById = (request, response) => {
         if (err) {
             response.status(500).json(err);
         } else {
-            response.status(res.statusCode).json(res);
+            response.status(res.statusCode).json(res.data);
         }
     });
 }
@@ -44,7 +44,7 @@ const getBooksByAuthor = (request, response) => {
         if (err) {
             response.status(500).json(err);
         } else {
-            response.status(res.statusCode).json(res);
+            response.status(res.statusCode).json(res.data);
         }
     });
 }
@@ -67,12 +67,15 @@ const createBook = (request, response) => {
 
 const getBooksByCategory = (request, response) => {
     const category = request.params['category'];
-    const query = 'select * from books.book book where book.category=\'' + category + '\'';
+    let query = "select * from books.book book"
+    if (category !== null && category !== "") {
+        query += ' where book.category=\'' + category + '\'';
+    }
     db.query(query, (err, res) => {
         if (err) {
             response.status(500).json(err);
         } else {
-            response.status(res.statusCode).json(res);
+            response.status(res.statusCode).json(res.data);
         }
     });
 }
@@ -84,7 +87,7 @@ const getBooksByTitle = (request, response) => {
         if (err) {
             response.status(500).json(err);
         } else {
-            response.status(res.statusCode).json(res);
+            response.status(res.statusCode).json(res.data);
         }
     });
 }
