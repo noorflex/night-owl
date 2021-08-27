@@ -1,0 +1,23 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem;
+    background-color: var(--color-neutral-70);
+}
+
+.login-form button {
+    margin-top: 2rem;
+    width: 150px;
+    height: 40px;
+    background-color: var(--color-brand);
+    font-size: var(--fs-md);
+}
+
+.form-field {
+    width: 200px;
+    height: 30px;
+    padding: 4px;
+    font-size: var(--fs-md);
+    color: var(--color-neutral-70);
+}
