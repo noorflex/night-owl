@@ -8,8 +8,8 @@ const BookListPage = (props) => {
     const history = useHistory();
     const [bookList, updateBookList] = useState([]);
     const [category, setCategory] = useState([]);
-    const [categoryChanged, setCategoryChanged] = useState([]);
-    const [titleChanged, setTitleChanged] = useState([]);
+    const [categoryChanged, setCategoryChanged] = useState();
+    const [titleChanged, setTitleChanged] = useState();
     const [title, setTitle] = useState([]);
     const onChangeTextToSearch = (bookTitle) => {
         setTitleChanged(true);

@@ -25,8 +25,7 @@ const Menu = (props) => {
     };
 
     useEffect(() => {
-        props.onChange(0);
-        console.log('Use Effect running');
+        console.log('Use Effect running Menu');
         async function fetchCategories() {
             const categoryResponse = await fetch(CATEGORY_API_URL);
 
