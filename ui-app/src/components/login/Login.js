@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { LOGIN_URL } from "../../constants";
 import "./Login.css";
-import { isLoggedIn, setLoggedIn, setLoggedUserName } from "./Auth";
+import { setLoggedIn, setLoggedInUser } from "./Auth";
 import { useHistory } from "react-router";
 
 const Login = ({ setToken }) => {
@@ -28,9 +28,9 @@ const Login = ({ setToken }) => {
             username,
             password
         });
-        setToken = token;
-        setLoggedIn(token);
-        setLoggedUserName(username);
+        setToken = token[0];
+        setLoggedIn(token[0]);
+        setLoggedInUser(token[0].user_id, token[0].username);
         history.push("/books");
     }
 

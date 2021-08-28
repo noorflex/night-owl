@@ -10,17 +10,28 @@ const setLoggedIn = (token) => {
     localStorage.setItem("token", token);
 }
 
-const setLoggedUserName = (username) => {
-    localStorage.setItem("username", username);
+const setLoggedInUser = (userId, username) => {
+    localStorage.setItem("user", JSON.stringify({ username: username, userId: userId }));
 }
 
 const getLoggedUserName = () => {
-    return localStorage.getItem("username");
+    const user = localStorage.getItem("user");
+    if (user) {
+        return JSON.parse(user).username;
+    }
+}
+
+const getLoggedUserId = () => {
+    const user = localStorage.getItem("user");
+    if (user) {
+        return JSON.parse(user).userId;
+    }
 }
 
 module.exports = {
     isLoggedIn,
     setLoggedIn,
-    setLoggedUserName,
+    setLoggedInUser,
+    getLoggedUserId,
     getLoggedUserName
 }
