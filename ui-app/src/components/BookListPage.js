@@ -3,11 +3,14 @@ import { BOOK_LIST_API_URL } from '../constants';
 import { useHistory } from 'react-router';
 import Menu from './Menu';
 import BookSearchControl from './BookSearchControl';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faList, faSearch, faStar } from '@fortawesome/free-solid-svg-icons';
 
 const BookListPage = (props) => {
     const history = useHistory();
     const [bookList, updateBookList] = useState([]);
     const [category, setCategory] = useState([]);
+    const [listView, setListView] = useState(false);
     const [categoryChanged, setCategoryChanged] = useState();
     const [titleChanged, setTitleChanged] = useState();
     const [title, setTitle] = useState([]);
@@ -56,21 +59,59 @@ const BookListPage = (props) => {
             </div>
             <div>
                 <BookSearchControl onClick={onChangeTextToSearch} />
+
             </div>
+            {
+                <div class="toggle-view">
+                    <FontAwesomeIcon icon={listView ? faBars : faList} className="search-icon"
+                        onClick={(event) => setListView(!listView)} />
+                </div>
+            }
         </div>
-        <div className="list-book">
-            {bookList.map(book => {
-                return <div className="book">
-                    <img className="book-cover" src={book.cover} onClick={() => {
+        <div></div>
+
+        <div className={listView ? "list-view-book" : "grid-view-book"} >            {
+            !listView ? bookList.map(book => {
+                return <div className="fast-transition">
+                    <div className="book">
+                        <img className="book-cover" src={book.cover} onClick={() => {
+                            history.push(`/bookdetails/${book.id}`);
+                        }}></img>
+                    </div>
+                    <div className="book-detail-view">
+                        <div className="book-title">{book.title}</div>
+                        <div className="book-category">{book.category}</div>
+                        <div className="book-rating">4.3<span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span></div>
+                        <div className="book-price">Rs {book.price}</div>
+                    </div>
+                </div>
+            }) : bookList.map(book => {
+                return <div className="book-row-view">
+                    <div className="book-cover-wrapper" onClick={() => {
                         history.push(`/bookdetails/${book.id}`);
-                    }}></img>
-                    <h2 className="book-title">{book.title}</h2>
-                    <p className="book-author">by <strong>{book.author}</strong></p>                    
-                    <p className="book-rating">Rating: <strong>4/5</strong></p>
+                    }}>
+                        <img className="book-cover" src={book.cover}></img>
+                    </div>
+                    <div className="row">
+                        <div className="column mr-5">
+                            <div class="label-text">Title</div>
+                            <div class="label-text">Rating</div>
+                            <div class="label-text">About Book</div>
+                            <div class="label-text">Price</div>
+                        </div>
+                        <div className="column">
+                            <div className="book-title" onClick={() => {
+                                history.push(`/bookdetails/${book.id}`);
+                            }}>{book.title}</div>
+                            <div className="book-rating">4.3<span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span></div>
+                            <div className="book-description">{book.description}</div>
+                            <div className="book-price">{book.price} INR</div>
+                        </div>
+                    </div>
                 </div>
             })}
         </div>
-    </div>
+    </div >
 };
 
 export default BookListPage;

@@ -7,8 +7,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  background-color: var(--color-neutral-90);
-  color: var(--color-neutral-20);
+  background-color: var(--color-neutral-10);
+  color: var(--color-neutral-90);
   font-size: 16px;
 }
 
@@ -35,6 +35,10 @@ body {
   
 }
 
+.toggle-view {
+  padding: 1rem;
+}
+
 .search-icon-div {
   display: flex;
   align-items: center;
@@ -54,11 +58,25 @@ body {
   margin-left: 30px;
 }
 
-.list-book {
+.grid-view-book {
   display: flex;
+  width: 90%;
   flex-wrap: wrap;
   grid-gap: 1rem;
   padding: 2rem;  
+  justify-content: center;
+}
+
+.list-view-book {
+  display: flex;
+  width:90%;
+  flex-direction: column;
+  grid-gap: 1rem;
+  padding: 2rem;  
+}
+
+.list-view-book h2 {
+  color: var(--color-neutral-70);
 }
 
 .list-book-main {
@@ -73,28 +91,108 @@ body {
 }
 
 .book {
-  width: 200px;
+  width: 250px;
   max-width: 1200px;
-  border: solid 1px var(--color-neutral-40);
-  border-radius: 1rem;
   padding: 0.6rem 1rem;
-  background-color: #F0F0FF;
+  background-color: var(--color-neutral-10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.book-row-view {
+  display:flex;
+  max-width: 1200px;
+  grid-gap: 2rem;
+  flex-direction: row;
+  padding: 0.6rem 1rem;
+  border-bottom:1px solid rgba(0, 0, 0, 0.3);
+  background-color:var(--color-neutral-0);
+}
+
+.book-row-view .book-cover {
+  width: 180px;
+  padding-top: 0;
+}
+
+.book-cover-wrapper {
+  margin-right: 4rem;
+}
+
+.book-row-view .book-rating {
+  width: 30px;
+}
+
+.book-list-view {
+  display: flex;
+  flex-direction:row-reverse;
+}
+
+.book-list-view h2{
+  color: var(--color-neutral-30);
+}
 .book-title {
-  color: var(--color-neutral-90);
-  font-size: var(--fs-md);  
+  color: var(--color-neutral-100);
+  font-size: var(--fs-rg);  
+}
+
+.book-title:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.book-category {
+  color: var(--color-neutral-50);
+  font-size: var(--fs-sm);
 }
 
 .book:hover {
   border-width: 3px;
   border-color: var(--color-neutral-50);
-  transform: scale(1.05);
-  transition: all 0.32 ease-in-out;
+}
+
+.book-detail-view {
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding:8px 0 16px 8px;
+}
+
+.book-detail-view div {
+  margin: 2px;
 }
 
 .book-desc {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-rg);
+  color: var(--color-neutral-100);
+}
+
+.fast-transition {
+  position: relative; /* For positioning the pseudo-element */
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
+}
+
+.fast-transition::before {
+  /* Position the pseudo-element. */
+  content: ' ';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* Create the box shadow at expanded size. */
+  box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.5);
+
+  /* Hidden by default. */
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+.fast-transition:hover::before {
+  /* Show the pseudo-element on hover. */
+  opacity: 1;
 }
 
 /* outer div of book detail */
@@ -116,9 +214,14 @@ body {
 .book-cover {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 80%;
+  padding-top: 1rem;
   align-items: center;
   height: 240px;
+}
+
+.book-cover:hover {
+  cursor: pointer;
 }
 
 .cover-image {
@@ -135,14 +238,47 @@ body {
   color: var(--color-neutral-40)
 }
 
-.book-author, .book-rating {
-  color: var(--color-neutral-70);
+.column {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.mr-5 {
+  padding-right: 5rem;
+}
+
+.label-text {
   font-size: var(--fs-rg);
-  margin: 0,0,0.4rem;
+  color: var(--color-neutral-40);
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+}
+.book-rating {
+  color: var(--color-neutral-10);
+  margin-top: 8px !important;
+  font-size: var(--fs-xs);
+  border-radius: 5px;
+  font-weight: var(--fw-bold);
+  background-color:green;
+  padding: 4px;
 }
 .list-book .book-author strong, .list-book .book-rating strong {
   color: var(--color-neutral-90);
-  font-weight: var(--fw-regular);
+  font-weight: var(--fw-light);
+}
+.book-price {
+  font-weight: var(--fw-bold);
+  font-size:  var(--fs-rg);
+}
+.star-icon {
+  padding-left: 4px;
+  margin-top: 0;
 }
 
 .rating {
