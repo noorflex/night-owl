@@ -78,7 +78,7 @@ const BookDetailsPage = () => {
                     }
                     {ratingUpdateStatus == 'updated' ? <span>Rating updated</span> : ratingUpdateStatus == 'error' ? <span>An error occured</span> : ""}
                 </div>
-                <div><img src={book.cover}></img></div>
+                <div><img src={book.coverImageUrl}></img></div>
                 <div>Book ID: {book.id}</div>
                 <div>Book Title: {book.title}</div>
                 <div>Book Author: {book.author}</div>

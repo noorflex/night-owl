@@ -112,7 +112,7 @@ const BookListPage = (props) => {
                     <a className="book" onClick={() => {
                         history.push(`/bookdetails/${book.id}`);
                     }}>
-                        <img className="book-cover" src={book.cover}></img>
+                        <img className="book-cover" src={book.coverImageUrl}></img>
                     </a>
                     <div className="book-detail-view">
                         <div className="book-title" onClick={() => {
@@ -129,7 +129,7 @@ const BookListPage = (props) => {
             }) : bookList.map(book => {
                 return <div className="book-row-view">
                     <div className="book-cover-wrapper" >
-                        <img className="book-cover" src={book.cover} onClick={() => {
+                        <img className="book-cover" src={book.coverImageUrl} onClick={() => {
                             history.push(`/bookdetails/${book.id}`);
                         }}></img>
                     </div>

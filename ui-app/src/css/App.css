@@ -124,6 +124,9 @@ body {
   width: 30px;
 }
 
+.book-row-view .book-title {
+  width: 800px;
+}
 .book-list-view {
   display: flex;
   flex-direction:row-reverse;
@@ -134,7 +137,8 @@ body {
 }
 .book-title {
   color: var(--color-neutral-100);
-  font-size: var(--fs-rg);  
+  font-size: var(--fs-rg);
+  width: 250px;  
 }
 
 .book-title:hover {
