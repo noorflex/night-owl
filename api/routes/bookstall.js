@@ -10,6 +10,7 @@ bookstall.get('/books/author/:author', bookscontroller.getBooksByAuthor);
 bookstall.post('/books/', bookscontroller.createBook);
 bookstall.get('/books/category/:category', bookscontroller.getBooksByCategory);
 bookstall.get('/books/title/:title', bookscontroller.getBooksByTitle);
+bookstall.post('/books/ratings/', bookscontroller.getBooksRating); // pass array of bookIds
 
 
 bookstall.get('/categories', categoryController.getAllCategory);

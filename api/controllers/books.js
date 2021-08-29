@@ -92,11 +92,23 @@ const getBooksByTitle = (request, response) => {
     });
 }
 
+const getBooksRating = (request, response) => {
+    const bookIds = request.body.bookIds;
+    console.log('BookIds for getting rating', bookIds.join());
+    const query = "select book_id, sum(rating) ratingSum, count(rating) numberOfRatings from books.ratings where book_id in " +
+        "(" + bookIds.map(bookId => "'" + bookId + "'").join() + ") group by book_id";
+    db.query(query, (err, res) => {
+        if (err) response.status(500).json(err);
+        return response.status(200).json(res.data);
+    });
+}
+
 module.exports = {
     createBook,
     getAllBooks,
     getBooksById,
     getBooksByAuthor,
     getBooksByCategory,
-    getBooksByTitle
+    getBooksByTitle,
+    getBooksRating
 }

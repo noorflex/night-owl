@@ -4,11 +4,13 @@ import { useHistory } from 'react-router';
 import Menu from './Menu';
 import BookSearchControl from './BookSearchControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faList, faSearch, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faList, faStar } from '@fortawesome/free-solid-svg-icons';
 
 const BookListPage = (props) => {
+    let currentRating;
     const history = useHistory();
     const [bookList, updateBookList] = useState([]);
+    const [booksRating, updateBooksRating] = useState();
     const [category, setCategory] = useState([]);
     const [listView, setListView] = useState(false);
     const [categoryChanged, setCategoryChanged] = useState();
@@ -24,6 +26,27 @@ const BookListPage = (props) => {
         setCategoryChanged(true);
         console.log("Category changed:" + bookCategory);
         setCategory(bookCategory);
+    }
+
+    const getRatingForBook = (bookId) => {
+        if (!booksRating || booksRating.length == 0) return 0;
+        const bookRatingForCurrentBook = booksRating.filter(
+            currentBookRating => currentBookRating.book_id === bookId);
+        if (!bookRatingForCurrentBook || bookRatingForCurrentBook.length == 0) return 0;
+        console.log('filter applied BookId:' + bookId);
+        console.log('After filtering:', bookRatingForCurrentBook);
+        const sumOfAllRatings = bookRatingForCurrentBook[0].ratingSum;
+        const numberOfRating = bookRatingForCurrentBook[0].numberOfRatings;
+        const rating = (sumOfAllRatings / numberOfRating).toFixed(1);
+        console.log(`rating for bookid ${bookId} is ${rating}`);
+        return rating;
+    }
+
+    const getUserCountOfRatingForBook = (bookId) => {
+        if (!booksRating || booksRating.length == 0) return 0;
+        const bookRatingForCurrentBook = booksRating.filter(bookRating => bookRating.book_id === bookId);
+        if (!bookRatingForCurrentBook || bookRatingForCurrentBook.length == 0) return 0;
+        return bookRatingForCurrentBook[0].numberOfRatings;
     }
 
     useEffect(() => {
@@ -49,6 +72,19 @@ const BookListPage = (props) => {
             }
             console.log('Booklist Response', bookListResponse);
             const bookListJsonData = await bookListResponse.json();
+            const bookIds = bookListJsonData.map(bookDetail => bookDetail.id);
+            const booksRatingResponse = await fetch(BOOK_LIST_API_URL + "/ratings", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "bookIds": bookIds })
+            });
+            const booksRatingJson = await booksRatingResponse.json();
+
+            console.log('books rating', booksRatingJson);
+
+            updateBooksRating(booksRatingJson);
             updateBookList(bookListJsonData);
         };
         fetchData();
@@ -62,7 +98,7 @@ const BookListPage = (props) => {
 
             </div>
             {
-                <div class="toggle-view">
+                <div className="toggle-view">
                     <FontAwesomeIcon icon={listView ? faBars : faList} className="search-icon"
                         onClick={(event) => setListView(!listView)} />
                 </div>
@@ -73,37 +109,51 @@ const BookListPage = (props) => {
         <div className={listView ? "list-view-book" : "grid-view-book"} >            {
             !listView ? bookList.map(book => {
                 return <div className="fast-transition">
-                    <div className="book">
-                        <img className="book-cover" src={book.cover} onClick={() => {
-                            history.push(`/bookdetails/${book.id}`);
-                        }}></img>
-                    </div>
+                    <a className="book" onClick={() => {
+                        history.push(`/bookdetails/${book.id}`);
+                    }}>
+                        <img className="book-cover" src={book.cover}></img>
+                    </a>
                     <div className="book-detail-view">
-                        <div className="book-title">{book.title}</div>
+                        <div className="book-title" onClick={() => {
+                            history.push(`/bookdetails/${book.id}`);
+                        }}>{book.title}</div>
                         <div className="book-category">{book.category}</div>
-                        <div className="book-rating">4.3<span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span></div>
+                        <div className="row">
+                            <div className="book-rating">{currentRating = getRatingForBook(book.id) == 0 ? "-" : currentRating}<span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span></div>
+                            <div className="book-category">{getUserCountOfRatingForBook(book.id)} Ratings)</div>
+                        </div>
                         <div className="book-price">Rs {book.price}</div>
                     </div>
                 </div>
             }) : bookList.map(book => {
                 return <div className="book-row-view">
-                    <div className="book-cover-wrapper" onClick={() => {
-                        history.push(`/bookdetails/${book.id}`);
-                    }}>
-                        <img className="book-cover" src={book.cover}></img>
+                    <div className="book-cover-wrapper" >
+                        <img className="book-cover" src={book.cover} onClick={() => {
+                            history.push(`/bookdetails/${book.id}`);
+                        }}></img>
                     </div>
                     <div className="row">
                         <div className="column mr-5">
-                            <div class="label-text">Title</div>
-                            <div class="label-text">Rating</div>
-                            <div class="label-text">About Book</div>
-                            <div class="label-text">Price</div>
+                            <div className="label-text">Title</div>
+                            <div className="label-text">Rating</div>
+                            <div className="label-text">About Book</div>
+                            <div className="label-text">Price</div>
                         </div>
                         <div className="column">
                             <div className="book-title" onClick={() => {
                                 history.push(`/bookdetails/${book.id}`);
                             }}>{book.title}</div>
-                            <div className="book-rating">4.3<span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span></div>
+                            <div className="row">
+                                {getUserCountOfRatingForBook(book.id) == 0 ? <div>Not Rated</div> :
+                                    <div>
+                                        <div className="book-rating">{getRatingForBook(book.id)}
+                                            <span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span>
+                                        </div>
+                                        <div className="book-category">({getUserCountOfRatingForBook(book.id)} Ratings)</div>
+                                    </div>
+                                }
+                            </div>
                             <div className="book-description">{book.description}</div>
                             <div className="book-price">{book.price} INR</div>
                         </div>
