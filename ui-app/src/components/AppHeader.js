@@ -17,6 +17,7 @@ const AppHeader = () => {
                 <div>
                     <button type="button" onClick={(event) => { setLoggedIn(""); history.push("/"); }}>Logout</button>
                     <button type="button">Welcome {getLoggedUserName}</button>
+                    <button type="button" onClick={(event) => { history.push("/books/add"); }}>Add Book</button>
                 </div>
             }
             {!loggedIn && <button type="button">Login</button>}

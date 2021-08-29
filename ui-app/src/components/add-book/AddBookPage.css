@@ -1,0 +1,58 @@
+@import url("../../css/variables.css");
+
+.add-book-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.add-book-form {
+    padding: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--color-neutral-10);
+}
+
+.input {
+    padding: 0.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#addBookForm {
+    padding: 2rem;
+}
+
+#description {
+    height: 200px;
+}
+
+#price {
+    width: 50px;
+    max-width: 100px;;
+}
+
+#title {
+    width: 350px;
+}
+
+#addBookButton {
+    width: 200px;
+    height: 50px;
+    background-color: var(--color-brand);
+    color: var(--color-neutral-10);
+    font-size: var(--fs-md);
+    align-self: flex-end;
+}
+
+#cancelButton {
+    width: 200px;
+    height: 50px;
+    margin-left: 1rem;
+    background-color: var(--color-neutral-30);
+    color: var(--color-neutral-80);
+    font-size: var(--fs-md);
+    align-self: flex-end;
+}
+
