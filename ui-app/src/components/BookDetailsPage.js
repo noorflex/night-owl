@@ -53,43 +53,64 @@ const BookDetailsPage = () => {
         }
         fetchBookDetails().then((book) => fetchBookRating(book.id));
     }, []);
-    return <div>
-        {loading ? <div className="loading-icon">Loading please wait...</div>
-            : <div><div>Book Details</div>
-                <div>Your Rating:
-                    {myRating.rating === 0 ?
+    return <div className="book-details-view-wrapper">
+        <div className="book-details-view">
+            {loading ? <div className="loading-icon">Loading please wait...</div>
+                : <div>
+                    <div className="book-details-top-row">
+                        <div className="book-cover"><img src={book.coverImageUrl}></img></div>
+                        <div className="column">
+                            <div className="book-title">{book.title}</div>
+                            <div>
+                                <div className="book-detail-row">
+                                    <div className="label-text">Description</div>
+                                    <div className="content book-description">{book.description}</div>
+                                </div>
+                                <div className="book-detail-row">
+                                    <div className="label-text">Author</div>
+                                    <div className="content">{book.author}</div>
+                                </div>
+                                <div className="book-detail-row">
+                                    <div className="label-text">Price</div>
+                                    <div className="content">{book.price}</div>
+                                </div>
+                                <div className="book-detail-row">
+                                    <div className="label-text">Category</div>
+                                    <div className="content  book-category">{book.category}</div>
+                                </div>
+                                <div className="book-detail-row">
+                                    <div className="label-text">Rating</div>
+                                    <div className="content">4.3</div>
+                                </div>
+                                <div className="book-detail-row">
+                                    <div className="label-text"> Your Rating</div>
+                                    <div className="content">
+                                        {myRating.rating === 0 ?
+                                            <ReactStars
+                                                count={5}
+                                                onChange={ratingChanged}
+                                                size={24}
+                                                activeColor="#ffd700"
+                                            /> :
+                                            <ReactStars
+                                                count={5}
+                                                value={myRating.rating}
+                                                onChange={ratingChanged}
+                                                size={24}
+                                                activeColor="#ffd700"
+                                            />
+                                        }
+                                        {ratingUpdateStatus == 'updated' ? <span>Rating updated</span> : ratingUpdateStatus == 'error' ? <span>An error occured</span> : ""}
 
-                        <ReactStars
-                            count={5}
-                            onChange={ratingChanged}
-                            size={48}
-                            activeColor="#ffd700"
-                        /> :
-                        <div>
-                            <div>Hello</div>
-                            <ReactStars
-                                count={5}
-                                value={myRating.rating}
-                                onChange={ratingChanged}
-                                size={48}
-                                activeColor="#ffd700"
-                            />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    }
-                    {ratingUpdateStatus == 'updated' ? <span>Rating updated</span> : ratingUpdateStatus == 'error' ? <span>An error occured</span> : ""}
-                </div>
-                <div><img src={book.coverImageUrl}></img></div>
-                <div>Book ID: {book.id}</div>
-                <div>Book Title: {book.title}</div>
-                <div>Book Author: {book.author}</div>
-                <div>Logged In : {getLoggedUserName()}</div>
-                <div>Rating:<ReactStars
-                    count={5}
-                    size={36}
-                    activeColor="#ffd700"
-                /></div></div>}
+                    </div>
+                    <div></div>
+                </div>}
+        </div>
     </div>
-
 }
 
 export default BookDetailsPage;
