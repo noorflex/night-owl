@@ -161,21 +161,20 @@ body {
   background-color: khaki;
 }
 .book-details-view .book-cover {
-  width: 800px;
-  height: 400px;
+  width: 400px;
+  height: 500px;
   padding-top: 0;
 }
 
 .book-details-top-row {
   display:flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: 4rem;
 }
 
 .book-details-view .book-cover > img {
   width: 100%;
   height: 100%;
-  margin: 1rem 4rem 0 1rem;
 }
 
 .book-cover-wrapper {
@@ -283,6 +282,20 @@ body {
 
 .book-details-view {
   padding: 4rem;
+}
+
+#gotoWebsite {
+  width: 100%;
+  height: 50px;
+  cursor: pointer;
+  background-color: var(--color-brand);
+  color: var(--color-neutral-10);
+  font-size: var(--fs-md);
+  align-self: flex-end;
+}
+
+#gotoWebsite:hover {
+  background-color: var(--color-neutral-70);
 }
 
 .lighter-text {

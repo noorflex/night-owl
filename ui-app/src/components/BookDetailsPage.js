@@ -79,7 +79,14 @@ const BookDetailsPage = () => {
             {loading ? <div className="loading-icon">Loading please wait...</div>
                 : <div>
                     <div className="book-details-top-row">
-                        <div className="book-cover"><img src={book.coverImageUrl}></img></div>
+                        <div className="column">
+                            <div className="book-cover">
+                                <img src={book.coverImageUrl}></img>
+                            </div>
+                            <button id="gotoWebsite" disabled={book.website == undefined}
+                                onClick={(event) => { window.location.href = book.website }}>Go To Website</button>
+                        </div>
+
                         <div className="column">
                             <div className="book-title">{book.title}</div>
                             <div>

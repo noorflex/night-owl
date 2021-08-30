@@ -27,7 +27,8 @@ const AddBookPage = () => {
         isbn: '',
         coverImageUrl: '',
         pages: 0,
-        price: 0
+        price: 0,
+        website: ''
     };
 
     useEffect(() => {
@@ -58,6 +59,10 @@ const AddBookPage = () => {
     }
     const handleCoverImageUrl = (event) => {
         setState({ ...state, coverImageUrl: event.target.value });
+    }
+
+    const handleWebsiteUrl = (event) => {
+        setState({ ...state, website: event.target.value });
     }
     const handlePages = (event) => {
         setState({ ...state, pages: event.target.value });
@@ -100,6 +105,7 @@ const AddBookPage = () => {
                 </div>
                 <input className="input" id="isbn" type="text" placeholder="ISBN" onChange={handleISBN}></input>
                 <input className="input" id="cover" type="text" placeholder="URL of the cover image" onChange={handleCoverImageUrl}></input>
+                <input className="input" id="cover" type="text" placeholder="Website Url" onChange={handleWebsiteUrl}></input>
                 <div>
                     <input className="input" id="pages" type="number" min="1" max="5000" placeholder="Pages" onChange={handlePages}></input>
                     <input className="input" id="price" type="number" min="1" max="50000" placeholder="Price" onChange={handlePrice}></input>
