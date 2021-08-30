@@ -5,6 +5,8 @@ import Menu from './Menu';
 import BookSearchControl from './BookSearchControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faList, faStar } from '@fortawesome/free-solid-svg-icons';
+import CategoryList from './bootstrap/CategoryList';
+import { Row, Col, Container } from "react-bootstrap";
 
 const BookListPage = (props) => {
     let currentRating;
@@ -89,23 +91,19 @@ const BookListPage = (props) => {
         };
         fetchData();
     }, [category, title])
-    return <div className="list-book-main">
-        <div className="book-search-bar">
-            <div><Menu onChange={onCategoryChanged} />
-            </div>
-            <div>
+    return <Container>
+        <Row className="justify-content-md-center mt-2">
+            <Col lg="2">
+                <CategoryList />
+            </Col>
+            <Col lg="5">
                 <BookSearchControl onClick={onChangeTextToSearch} />
-
-            </div>
-            {
-                <div className="toggle-view">
-                    <FontAwesomeIcon icon={listView ? faBars : faList} className="search-icon"
-                        onClick={(event) => setListView(!listView)} />
-                </div>
-            }
-        </div>
-        <div></div>
-
+            </Col>
+            <Col lg="1">
+                <FontAwesomeIcon icon={listView ? faBars : faList} className="search-icon"
+                    onClick={(event) => setListView(!listView)} />
+            </Col>
+        </Row>
         <div className={listView ? "list-view-book" : "grid-view-book"} >            {
             !listView ? bookList.map(book => {
                 return <div className="fast-transition">
@@ -161,7 +159,7 @@ const BookListPage = (props) => {
                 </div>
             })}
         </div>
-    </div >
+    </Container>
 };
 
 export default BookListPage;

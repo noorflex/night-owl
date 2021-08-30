@@ -29,7 +29,7 @@ body {
 
 .header-title, .book-search-title {
   margin-left: 1rem;
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
   color: var(--color-neutral-10);
   text-decoration: none;
   cursor: pointer;  
@@ -105,11 +105,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.book-search-bar {
-  display: flex;
-  padding: 0.2rem;
 }
 
 .book {
