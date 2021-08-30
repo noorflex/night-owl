@@ -83,8 +83,8 @@ const BookDetailsPage = () => {
                             <div className="book-cover">
                                 <img src={book.coverImageUrl}></img>
                             </div>
-                            <button id="gotoWebsite" disabled={book.website == undefined}
-                                onClick={(event) => { window.location.href = book.website }}>Go To Website</button>
+                            {book.website &&
+                                <button id="gotoWebsite" disabled={book.website} onClick={(event) => { window.location.href = book.website }}>Go To Website</button>}
                         </div>
 
                         <div className="column">
@@ -108,8 +108,13 @@ const BookDetailsPage = () => {
                                 </div>
                                 <div className="book-detail-row">
                                     <div className="label-text">Rating</div>
-                                    <div className="content book-rating">
-                                        <div>{getBookRating()}<FontAwesomeIcon icon={faStar} size="sm" /></div> ({getNumberOfRatings()} Reviews)</div>
+                                    <div className="row">
+                                        <div className="content book-rating row">
+                                            {getBookRating()}
+                                            <FontAwesomeIcon icon={faStar} size="sm" />
+                                        </div>
+                                        <div className="pt-8">({getNumberOfRatings()} Reviews)</div>
+                                    </div>
                                 </div>
                                 <div className="book-detail-row">
                                     <div className="label-text"> Your Rating</div>

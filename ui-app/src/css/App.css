@@ -137,12 +137,14 @@ body {
 .book-detail-row {
   display: flex;
   flex-direction: row;
+  gap:2rem;
   justify-items: flex-start;
   margin-bottom: 1rem;
 }
 
 .book-detail-row .label-text {
-  flex: 1;
+  flex-basis: 1;
+  width: 100px;
 }
 .book-detail-row .content {
   flex: 5;
@@ -158,8 +160,23 @@ body {
 
 .book-detail-row .book-category {
   color: var(--color-neutral-60);
-  background-color: khaki;
+  max-width: 150px;
+  flex-grow: 0;
+  padding: 0.4rem;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  border-radius: 5px;
+  color: var(--color-neutral-10);
+  background-color:maroon;
 }
+
+.book-detail-row .book-rating {
+  max-width: 30px;
+  margin-right: 1rem;
+  flex-grow: 0;
+}
+
+
 .book-details-view .book-cover {
   width: 400px;
   height: 500px;
@@ -313,6 +330,9 @@ body {
   padding-right: 5rem;
 }
 
+.pt-8 {
+  padding-top: 8px;
+}
 .label-text {
   font-size: var(--fs-rg);
   color: var(--color-neutral-40);
