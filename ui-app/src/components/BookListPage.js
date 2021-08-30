@@ -120,8 +120,8 @@ const BookListPage = (props) => {
                         }}>{book.title}</div>
                         <div className="book-category">{book.category}</div>
                         <div className="row">
-                            <div className="book-rating">{currentRating = getRatingForBook(book.id) == 0 ? "-" : currentRating}<span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span></div>
-                            <div className="book-category">{getUserCountOfRatingForBook(book.id)} Ratings)</div>
+                            <div className="book-rating">{getRatingForBook(book.id) == 0 ? "-" : getRatingForBook(book.id)}<span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span></div>
+                            <div className="book-category">({getUserCountOfRatingForBook(book.id)} Ratings)</div>
                         </div>
                         <div className="book-price">Rs {book.price}</div>
                     </div>
