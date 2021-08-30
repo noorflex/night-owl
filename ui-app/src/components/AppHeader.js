@@ -11,7 +11,7 @@ const AppHeader = () => {
         setLoggedInStatus(loggedInStatus);
     }, []);
     return <div className='app-header'>
-        <div><a className="header-title">Night Owl</a></div>
+        <div><a className="header-title" onClick={(event) => history.push("/books")}>Night Owl</a></div>
         <div className="login-button">
             {loggedIn &&
                 <div>

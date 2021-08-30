@@ -28,6 +28,7 @@ body {
   align-items: flex-start;
   font-size: var(--fs-md);
   color: var(--color-neutral-10);
+  cursor: pointer;
   
 }
 
