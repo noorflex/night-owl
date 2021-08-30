@@ -79,7 +79,6 @@ const AddBookPage = () => {
             body: JSON.stringify(state)
         }).then(() => {
             setMessage(`Successfully Added Book ${state.title}`);
-            setState(initialState);
             setLoading(false);
         }, (err) => {
             setError(`Failed to add Book,Please try again ${err}`);
@@ -92,6 +91,7 @@ const AddBookPage = () => {
             {error != "" && <div className="error">{error}</div>}
             {message != "" && <div>{message}</div>}
             <div className="add-book-form">
+                <a onClick={(event) => { document.getElementById("addBookForm").reset(); }} href="#">Clear</a>
                 <input className="input" id="title" type="text" placeholder="Title" onChange={handleTitle} />
                 <textarea className="input" id="description" placeholder="Description" onChange={handleDescription} />
                 <div className="row">
