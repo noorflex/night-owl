@@ -3,10 +3,13 @@ import { getLoggedUserId, getLoggedUserName, isLoggedIn } from "./login/Auth";
 import { useParams } from "react-router";
 import { BOOK_LIST_API_URL, RATINGS_API_URL } from "../constants";
 import ReactStars from "react-rating-stars-component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const BookDetailsPage = () => {
     const params = useParams();
     const [book, setBook] = useState([]);
+    const [bookRating, setBookRating] = useState();
     const [ratingUpdateStatus, setRatingUpdateStatus] = useState(null);
     const [loading, setLoading] = useState(true);
     const [myRating, setMyRating] = useState({ rating: 0 });
@@ -31,12 +34,30 @@ const BookDetailsPage = () => {
             .catch((err) => setRatingUpdateStatus('error'));
     };
 
+    const getBookRating = () => {
+        if (!bookRating || bookRating == null) return "";
+        return bookRating[0].ratingSum / bookRating[0].numberOfRatings;
+    }
+
+    const getNumberOfRatings = () => {
+        if (!bookRating || bookRating == null) return "";
+        return bookRating[0].numberOfRatings;
+    }
+
     useEffect(() => {
         async function fetchBookDetails() {
             const id = params.id;
             const url = BOOK_LIST_API_URL + "/" + id;
             const bookResponse = await fetch(url);
             const bookJson = await bookResponse.json();
+            const rating = await fetch(BOOK_LIST_API_URL + "/ratings", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "bookIds": [bookJson[0].id] })
+            });
+            setBookRating(await rating.json());
             setLoading(false);
             setBook(bookJson[0]);
             return bookJson[0];
@@ -80,25 +101,28 @@ const BookDetailsPage = () => {
                                 </div>
                                 <div className="book-detail-row">
                                     <div className="label-text">Rating</div>
-                                    <div className="content">4.3</div>
+                                    <div className="content book-rating">
+                                        <div>{getBookRating()}<FontAwesomeIcon icon={faStar} size="sm" /></div> ({getNumberOfRatings()} Reviews)</div>
                                 </div>
                                 <div className="book-detail-row">
                                     <div className="label-text"> Your Rating</div>
                                     <div className="content">
-                                        {myRating.rating === 0 ?
+                                        {myRating === undefined || myRating.rating === 0 ?
                                             <ReactStars
                                                 count={5}
                                                 onChange={ratingChanged}
                                                 size={24}
                                                 activeColor="#ffd700"
                                             /> :
-                                            <ReactStars
-                                                count={5}
-                                                value={myRating.rating}
-                                                onChange={ratingChanged}
-                                                size={24}
-                                                activeColor="#ffd700"
-                                            />
+                                            <div>
+                                                <ReactStars
+                                                    count={5}
+                                                    value={myRating.rating}
+                                                    onChange={ratingChanged}
+                                                    size={24}
+                                                    activeColor="#ffd700"
+                                                />
+                                            </div>
                                         }
                                         {ratingUpdateStatus == 'updated' ? <span>Rating updated</span> : ratingUpdateStatus == 'error' ? <span>An error occured</span> : ""}
 
