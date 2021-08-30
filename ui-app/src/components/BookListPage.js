@@ -13,7 +13,7 @@ const BookListPage = (props) => {
     const history = useHistory();
     const [bookList, updateBookList] = useState([]);
     const [booksRating, updateBooksRating] = useState();
-    const [category, setCategory] = useState([]);
+    const [category, setCategory] = useState("All");
     const [listView, setListView] = useState(false);
     const [categoryChanged, setCategoryChanged] = useState();
     const [titleChanged, setTitleChanged] = useState();
@@ -59,7 +59,11 @@ const BookListPage = (props) => {
             if (categoryChanged) {
                 setCategoryChanged(false);
                 console.log('Fetch book by category');
-                bookListResponse = await fetch(BOOK_LIST_API_URL + "/category/" + category);
+                if (category != "All") {
+                    bookListResponse = await fetch(BOOK_LIST_API_URL + "/category/" + category);
+                } else {
+                    bookListResponse = await fetch(BOOK_LIST_API_URL);
+                }
             } else if (titleChanged) {
                 setTitleChanged(false);
                 console.log('Fetch book by title');
@@ -94,7 +98,7 @@ const BookListPage = (props) => {
     return <Container>
         <Row className="justify-content-md-center mt-2">
             <Col lg="2">
-                <CategoryList />
+                <CategoryList onCategorySeleceted={onCategoryChanged} selected={category} />
             </Col>
             <Col lg="5">
                 <BookSearchControl onClick={onChangeTextToSearch} />

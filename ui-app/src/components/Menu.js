@@ -31,6 +31,8 @@ const Menu = (props) => {
 
             const categoryResponseJson = await categoryResponse.json();
             console.log('Category Response', categoryResponseJson);
+            const categoryAll = { name: 'All', description: '' };
+            categoryResponseJson.push(categoryResponseJson);
             updateCategory(categoryResponseJson);
         }
         fetchCategories();
