@@ -28,12 +28,11 @@ body {
 }
 
 .header-title, .book-search-title {
-  align-items: flex-start;
   margin-left: 1rem;
-  font-size: var(--fs-md);
+  font-size: var(--fs-lg);
   color: var(--color-neutral-10);
-  cursor: pointer;
-  
+  text-decoration: none;
+  cursor: pointer;  
 }
 
 .login-section a{
