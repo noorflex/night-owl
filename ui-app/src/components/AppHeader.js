@@ -1,3 +1,5 @@
+import { faHamburger } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { getLoggedUserName, isLoggedIn, setLoggedIn } from './login/Auth';
@@ -12,15 +14,15 @@ const AppHeader = () => {
     }, []);
     return <div className='app-header'>
         <div><a className="header-title" onClick={(event) => history.push("/books")}>Night Owl</a></div>
-        <div className="login-button">
+        <div className="login-section">
             {loggedIn &&
-                <div>
-                    <button type="button" onClick={(event) => { setLoggedIn(""); history.push("/"); }}>Logout</button>
-                    <button type="button">Welcome {getLoggedUserName}</button>
-                    <button type="button" onClick={(event) => { history.push("/books/add"); }}>Add Book</button>
+                <div className="row">
+                    <a href="#" onClick={(event) => { history.push("/books/add"); }}>Add Book</a>
+                    {isLoggedIn && <div><label>Welcome {getLoggedUserName()}</label>
+                        <a href="#" onClick={(event) => { setLoggedIn(""); history.push("/"); }}>(Logout)</a>
+                    </div>}
                 </div>
             }
-            {!loggedIn && <button type="button">Login</button>}
         </div>
     </div >
 };

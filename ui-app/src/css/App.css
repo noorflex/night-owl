@@ -14,7 +14,7 @@ body {
 
 .app-header, .book-search-header {
   display:flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   background-color:var(--color-brand);
   font-size: var(--fs-rg);
   position: sticky;
@@ -32,8 +32,25 @@ body {
   
 }
 
-.login-button {
+.login-section a{
+  text-decoration: none;
+  color:rgb(39, 39, 116);
+  font-weight: var(--fw-bold);
+  margin-right: 1rem;
+}
+.appMenu {
+  text-decoration: none;
   
+}
+.appMenu li {
+  text-decoration: none;
+  z-index: 9000;
+  background-color: var(--color-neutral-20);
+}
+
+.appMenu a {
+  text-decoration: none;
+  background-color: var(--color-neutral-10);
 }
 
 .toggle-view {
