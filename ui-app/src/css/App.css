@@ -23,9 +23,13 @@ body {
   z-index: 999;
   padding-left: 2rem;
 }
+.app-header .logo {
+  cursor: pointer;
+}
 
 .header-title, .book-search-title {
   align-items: flex-start;
+  margin-left: 1rem;
   font-size: var(--fs-md);
   color: var(--color-neutral-10);
   cursor: pointer;

@@ -1,4 +1,4 @@
-import { faHamburger } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faHamburger } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
@@ -13,7 +13,10 @@ const AppHeader = () => {
         setLoggedInStatus(loggedInStatus);
     }, []);
     return <div className='app-header'>
-        <div><a className="header-title" onClick={(event) => history.push("/books")}>Night Owl</a></div>
+        <div  onClick={(event) => history.push("/books")} className="logo">
+            <FontAwesomeIcon icon={faBook} size="2x" color="lightyellow" />
+            <a className="header-title">Night Owl</a>
+        </div>
         <div className="login-section">
             {loggedIn &&
                 <div className="row">
