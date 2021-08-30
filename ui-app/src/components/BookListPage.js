@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { BOOK_LIST_API_URL } from '../constants';
 import { useHistory } from 'react-router';
-import Menu from './Menu';
 import BookSearchControl from './BookSearchControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faList, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCircle, faList, faSpinner, faStar } from '@fortawesome/free-solid-svg-icons';
 import CategoryList from './bootstrap/CategoryList';
 import { Row, Col, Container } from "react-bootstrap";
+import Loader from "react-loader-spinner";
 
 const BookListPage = (props) => {
     let currentRating;
     const history = useHistory();
     const [bookList, updateBookList] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [booksRating, updateBooksRating] = useState();
     const [category, setCategory] = useState("All");
     const [listView, setListView] = useState(false);
@@ -55,6 +56,7 @@ const BookListPage = (props) => {
         console.log('Use effect BookListPage');
         // Make api call and store values
         async function fetchData() {
+            setLoading(true);
             let bookListResponse;
             if (categoryChanged) {
                 setCategoryChanged(false);
@@ -92,6 +94,7 @@ const BookListPage = (props) => {
 
             updateBooksRating(booksRatingJson);
             updateBookList(bookListJsonData);
+            setLoading(false);
         };
         fetchData();
     }, [category, title])
@@ -108,61 +111,71 @@ const BookListPage = (props) => {
                     onClick={(event) => setListView(!listView)} />
             </Col>
         </Row>
-        <div className={listView ? "list-view-book" : "grid-view-book"} >            {
-            !listView ? bookList.map(book => {
-                return <div className="fast-transition">
-                    <a className="book" onClick={() => {
-                        history.push(`/bookdetails/${book.id}`);
-                    }}>
-                        <img className="book-cover" src={book.coverImageUrl}></img>
-                    </a>
-                    <div className="book-detail-view">
-                        <div className="book-title" onClick={() => {
-                            history.push(`/bookdetails/${book.id}`);
-                        }}>{book.title}</div>
-                        <div className="book-category">{book.category}</div>
-                        <div className="row">
-                            <div className="book-rating">{getRatingForBook(book.id) == 0 ? "-" : getRatingForBook(book.id)}<span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span></div>
-                            <div className="book-category">({getUserCountOfRatingForBook(book.id)} Ratings)</div>
-                        </div>
-                        <div className="book-price">Rs {book.price}</div>
-                    </div>
-                </div>
-            }) : bookList.map(book => {
-                return <div className="book-row-view">
-                    <div className="book-cover-wrapper" >
-                        <img className="book-cover" src={book.coverImageUrl} onClick={() => {
-                            history.push(`/bookdetails/${book.id}`);
-                        }}></img>
-                    </div>
-                    <div className="row">
-                        <div className="column mr-5">
-                            <div className="label-text">Title</div>
-                            <div className="label-text">Rating</div>
-                            <div className="label-text">About Book</div>
-                            <div className="label-text">Price</div>
-                        </div>
-                        <div className="column">
-                            <div className="book-title" onClick={() => {
+        <div>
+            {loading ? <Loader className="center-display"
+                type="Puff"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={300000} //3 secs
+            /> :
+                <div className={listView ? "list-view-book" : "grid-view-book"} > {
+                    !listView ? bookList.map(book => {
+                        return <div className="fast-transition">
+                            <a className="book" onClick={() => {
                                 history.push(`/bookdetails/${book.id}`);
-                            }}>{book.title}</div>
-                            <div className="row">
-                                {getUserCountOfRatingForBook(book.id) == 0 ? <div>Not Rated</div> :
-                                    <div>
-                                        <div className="book-rating">{getRatingForBook(book.id)}
-                                            <span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span>
-                                        </div>
-                                        <div className="book-category">({getUserCountOfRatingForBook(book.id)} Ratings)</div>
-                                    </div>
-                                }
+                            }}>
+                                <img className="book-cover" src={book.coverImageUrl}></img>
+                            </a>
+                            <div className="book-detail-view">
+                                <div className="book-title" onClick={() => {
+                                    history.push(`/bookdetails/${book.id}`);
+                                }}>{book.title}</div>
+                                <div className="book-category">{book.category}</div>
+                                <div className="row">
+                                    <div className="book-rating">{getRatingForBook(book.id) == 0 ? "-" : getRatingForBook(book.id)}<span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span></div>
+                                    <div className="book-category">({getUserCountOfRatingForBook(book.id)} Ratings)</div>
+                                </div>
+                                <div className="book-price">Rs {book.price}</div>
                             </div>
-                            <div className="book-description">{book.description}</div>
-                            <div className="book-price">{book.price} INR</div>
                         </div>
-                    </div>
+                    }) : bookList.map(book => {
+                        return <div className="book-row-view">
+                            <div className="book-cover-wrapper" >
+                                <img className="book-cover" src={book.coverImageUrl} onClick={() => {
+                                    history.push(`/bookdetails/${book.id}`);
+                                }}></img>
+                            </div>
+                            <div className="row">
+                                <div className="column mr-5">
+                                    <div className="label-text">Title</div>
+                                    <div className="label-text">Rating</div>
+                                    <div className="label-text">About Book</div>
+                                    <div className="label-text">Price</div>
+                                </div>
+                                <div className="column">
+                                    <div className="book-title" onClick={() => {
+                                        history.push(`/bookdetails/${book.id}`);
+                                    }}>{book.title}</div>
+                                    <div className="row">
+                                        {getUserCountOfRatingForBook(book.id) == 0 ? <div>Not Rated</div> :
+                                            <div>
+                                                <div className="book-rating">{getRatingForBook(book.id)}
+                                                    <span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span>
+                                                </div>
+                                                <div className="book-category">({getUserCountOfRatingForBook(book.id)} Ratings)</div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div className="book-description">{book.description}</div>
+                                    <div className="book-price">{book.price} INR</div>
+                                </div>
+                            </div>
+                        </div>
+                    })}
+                    {bookList.length === 0 && <div className="center-display">No Items to Display</div>}
                 </div>
-            })}
-        </div>
+            }</div>
     </Container>
 };
 

@@ -106,6 +106,12 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.center-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
 
 .book {
   width: 250px;
