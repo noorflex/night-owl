@@ -82,7 +82,7 @@ body {
 
 .grid-view-book {
   display: flex;
-  width: 90%;
+  width: 100%;
   flex-wrap: wrap;
   grid-gap: 1rem;
   padding: 2rem;  
@@ -111,6 +111,12 @@ body {
   justify-content: center;
   align-items: center;
   height: 80vh;
+}
+
+.book-tiles {
+  width: 260;
+  padding:0 1rem 0 1rem;
+  margin: 1rem;
 }
 
 .book {

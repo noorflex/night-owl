@@ -122,22 +122,29 @@ const BookListPage = (props) => {
                 <div className={listView ? "list-view-book" : "grid-view-book"} > {
                     !listView ? bookList.map(book => {
                         return <div className="fast-transition">
-                            <a className="book" onClick={() => {
-                                history.push(`/bookdetails/${book.id}`);
-                            }}>
-                                <img className="book-cover" src={book.coverImageUrl}></img>
-                            </a>
-                            <div className="book-detail-view">
-                                <div className="book-title" onClick={() => {
-                                    history.push(`/bookdetails/${book.id}`);
-                                }}>{book.title}</div>
-                                <div className="book-category">{book.category}</div>
-                                <div className="row">
-                                    <div className="book-rating">{getRatingForBook(book.id) == 0 ? "-" : getRatingForBook(book.id)}<span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span></div>
-                                    <div className="book-category">({getUserCountOfRatingForBook(book.id)} Ratings)</div>
-                                </div>
-                                <div className="book-price">Rs {book.price}</div>
-                            </div>
+                            <Col className="book-tiles">
+                                <Row>
+                                    <a className="book" onClick={() => {
+                                        history.push(`/bookdetails/${book.id}`);
+                                    }}>
+                                        <img className="book-cover" src={book.coverImageUrl}></img>
+                                    </a>
+                                </Row>
+                                <Row>
+                                    <div>
+                                        <Row className="book-title" onClick={() => {
+                                            history.push(`/bookdetails/${book.id}`);
+                                        }}>{book.title}</Row>
+                                        <Row className="book-category mb-2">{book.category}</Row>
+                                        <Row className="mb-2">
+                                            <Col lg="3" className="book-rating">{getRatingForBook(book.id) == 0 ? "-" : getRatingForBook(book.id)}
+                                                <span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span></Col>
+                                            <Col lg="6">({getUserCountOfRatingForBook(book.id)} Ratings)</Col>
+                                        </Row>
+                                        <Row className="book-price">Rs {book.price}</Row>
+                                    </div>
+                                </Row>
+                            </Col>
                         </div>
                     }) : bookList.map(book => {
                         return <div className="book-row-view">
