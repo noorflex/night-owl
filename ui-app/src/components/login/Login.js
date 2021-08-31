@@ -62,6 +62,10 @@ const Login = ({ setToken }) => {
                         <Row className="p-4">
                             <Button variant="primary" type="submit">Login</Button>
                         </Row>
+                        <Row>
+                            <div className="text-secondary">Please refresh the page after login to get Add Book option</div>
+                            <div className="text-secondary">username: bob, alex, noor/ password anything</div>
+                        </Row>
                     </Form>
                 </Row>
             </Col>
