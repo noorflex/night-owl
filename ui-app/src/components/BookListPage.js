@@ -5,7 +5,7 @@ import BookSearchControl from './BookSearchControl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faCircle, faList, faSpinner, faStar } from '@fortawesome/free-solid-svg-icons';
 import CategoryList from './bootstrap/CategoryList';
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Table } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 
 const BookListPage = (props) => {
@@ -147,43 +147,58 @@ const BookListPage = (props) => {
                             </Col>
                         </div>
                     }) : bookList.map(book => {
-                        return <div className="book-row-view">
-                            <div className="book-cover-wrapper" >
-                                <img className="book-cover" src={book.coverImageUrl} onClick={() => {
-                                    history.push(`/bookdetails/${book.id}`);
-                                }}></img>
-                            </div>
-                            <div className="row">
-                                <div className="column mr-5">
-                                    <div className="label-text">Title</div>
-                                    <div className="label-text">Rating</div>
-                                    <div className="label-text">About Book</div>
-                                    <div className="label-text">Price</div>
-                                </div>
-                                <div className="column">
-                                    <div className="book-title" onClick={() => {
-                                        history.push(`/bookdetails/${book.id}`);
-                                    }}>{book.title}</div>
-                                    <div className="row">
-                                        {getUserCountOfRatingForBook(book.id) == 0 ? <div>Not Rated</div> :
-                                            <div>
-                                                <div className="book-rating">{getRatingForBook(book.id)}
-                                                    <span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" /></span>
-                                                </div>
-                                                <div className="book-category">({getUserCountOfRatingForBook(book.id)} Ratings)</div>
-                                            </div>
-                                        }
+                        return <Container fluid>
+                            <Row className="border-bottom pb-4">
+                                <Col lg="3">
+                                    <div className="book-cover-wrapper" >
+                                        <img className="book-cover" src={book.coverImageUrl} onClick={() => {
+                                            history.push(`/bookdetails/${book.id}`);
+                                        }}></img>
                                     </div>
-                                    <div className="book-description">{book.description}</div>
-                                    <div className="book-price">{book.price} INR</div>
-                                </div>
-                            </div>
-                        </div>
+                                </Col>
+                                <Col lg="7">
+                                    <Table borderless>
+                                        <tbody>
+                                            <tr>
+                                                <td className="text-secondary">Title</td>
+                                                <td><div className="text-lg" onClick={() => {
+                                                    history.push(`/bookdetails/${book.id}`);
+                                                }}>{book.title}</div></td>
+                                            </tr>
+                                            <tr>
+                                                <td className="text-secondary">About Book</td>
+                                                <td className="text-secondary">{book.description}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className="text-secondary">Rating</td>
+                                                <td>
+                                                    {getUserCountOfRatingForBook(book.id) == 0 ? <div>Not Rated</div> :
+                                                        <div>
+                                                            <span className="book-rating">{getRatingForBook(book.id)}
+                                                                <span><FontAwesomeIcon icon={faStar} size="sm" className="star-icon" />
+                                                                </span>
+                                                            </span>
+                                                            <span className="p-2">
+                                                                ({getUserCountOfRatingForBook(book.id)} Ratings)
+                                                            </span>
+                                                        </div>
+                                                    }
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td className="text-secondary">Price</td>
+                                                <td>{book.price}</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                </Col>
+                            </Row>
+                        </Container>
                     })}
                     {bookList.length === 0 && <div className="center-display">No Items to Display</div>}
                 </div>
             }</div>
-    </Container>
+    </Container >
 };
 
 export default BookListPage;
