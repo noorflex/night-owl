@@ -6,6 +6,7 @@ import ReactStars from "react-rating-stars-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Row, Col } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 const BookDetailsPage = () => {
     const params = useParams();
@@ -84,7 +85,7 @@ const BookDetailsPage = () => {
                                 <img src={book.coverImageUrl}></img>
                             </div>
                             {book.website &&
-                                <button id="gotoWebsite" disabled={book.website} onClick={(event) => { window.location.href = book.website }}>Go To Website</button>}
+                                <Button id="gotoWebsite" onClick={(event) => { window.location.href = book.website }}>Go To Website</Button>}
                         </div>
 
                         <div className="column">
@@ -147,7 +148,7 @@ const BookDetailsPage = () => {
                     <div></div>
                 </div>}
         </div>
-    </div>
+    </div >
 }
 
 export default BookDetailsPage;
