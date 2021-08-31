@@ -47,25 +47,17 @@ const Login = ({ setToken }) => {
                 <Row><div className="error">{error}</div></Row>
                 <Row>
                     <Form onSubmit={handleSubmit}>
-                        <Row className="m-2">
-                            <FloatingLabel controlId="username" label="username">
-                                <Form.Control type="text" placeholder="bob" onChange={e => setUsername(e.target.value)} >
-                                </Form.Control>
-                            </FloatingLabel>
-                        </Row>
-                        <Row className="m-2">
-                            <FloatingLabel controlId="password" label="password">
-                                <Form.Control type="password" placeholder="password" onChange={e => setPassword(e.target.value)} >
-                                </Form.Control>
-                            </FloatingLabel>
-                        </Row>
-                        <Row className="p-4">
-                            <Button variant="primary" type="submit">Login</Button>
-                        </Row>
-                        <Row>
-                            <div className="text-secondary">Please refresh the page after login to get Add Book option</div>
-                            <div className="text-secondary">username: bob, alex, noor/ password anything</div>
-                        </Row>
+                        <FloatingLabel controlId="username" label="username" className="mb-3">
+                            <Form.Control type="text" placeholder="bob" onChange={e => setUsername(e.target.value)} >
+                            </Form.Control>
+                        </FloatingLabel>
+                        <FloatingLabel controlId="password" label="password">
+                            <Form.Control type="password" placeholder="password" onChange={e => setPassword(e.target.value)} >
+                            </Form.Control>
+                        </FloatingLabel>
+                        <Button variant="primary" type="submit">Login</Button>
+                        <div className="text-secondary">Please refresh the page after login to get Add Book option</div>
+                        <div className="text-secondary">username: bob, alex, noor/ password anything</div>
                     </Form>
                 </Row>
             </Col>
