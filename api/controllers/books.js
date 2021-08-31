@@ -12,7 +12,7 @@ const db = require('../config/dbconfig');
     website
  */
 const getAllBooks = (request, response) => {
-    db.query('select * from books.book book', (err, res) => {
+    db.query('select * from books.book book order by book.__updatedtime__ desc', (err, res) => {
         if (err) {
             response.status(500).json(err);
         } else {
