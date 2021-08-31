@@ -56,7 +56,7 @@ const Login = ({ setToken }) => {
                             </Form.Control>
                         </FloatingLabel>
                         <Button variant="primary" type="submit">Login</Button>
-                        <div className="text-secondary">Please refresh the page after login to get Add Book option</div>
+                        <div className="text-secondary mt-2">Please refresh the page after login to Logout option/Username Display</div>
                         <div className="text-secondary">username: bob, alex, noor/ password anything</div>
                     </Form>
                 </Row>

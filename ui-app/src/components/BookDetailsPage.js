@@ -119,27 +119,28 @@ const BookDetailsPage = () => {
                                 </Row>
                                 <div className="book-detail-row">
                                     <div className="label-text"> Your Rating</div>
-                                    <div className="content">
-                                        {myRating === undefined || myRating.rating === 0 ?
-                                            <ReactStars
-                                                count={5}
-                                                onChange={ratingChanged}
-                                                size={24}
-                                                activeColor="#ffd700"
-                                            /> :
-                                            <div>
+                                    {isLoggedIn() ?
+                                        <div className="content">
+                                            {myRating === undefined || myRating.rating === 0 ?
                                                 <ReactStars
                                                     count={5}
-                                                    value={myRating.rating}
                                                     onChange={ratingChanged}
                                                     size={24}
                                                     activeColor="#ffd700"
-                                                />
-                                            </div>
-                                        }
-                                        {ratingUpdateStatus == 'updated' ? <span>Rating updated</span> : ratingUpdateStatus == 'error' ? <span>An error occured</span> : ""}
+                                                /> :
+                                                <div>
+                                                    <ReactStars
+                                                        count={5}
+                                                        value={myRating.rating}
+                                                        onChange={ratingChanged}
+                                                        size={24}
+                                                        activeColor="#ffd700"
+                                                    />
+                                                </div>
+                                            }
+                                            {ratingUpdateStatus == 'updated' ? <span>Rating updated</span> : ratingUpdateStatus == 'error' ? <span>An error occured</span> : ""}
 
-                                    </div>
+                                        </div> : <a href="/">Login to post your rating</a>}
                                 </div>
                             </div>
                         </div>

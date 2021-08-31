@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react"
 import "./AddBookPage.css";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import CategoryList from "../bootstrap/CategoryList";
+import { isLoggedIn } from "../login/Auth";
+import { useHistory } from "react-router";
 
 const AddBookPage = () => {
+    const history = useHistory();
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -17,6 +20,13 @@ const AddBookPage = () => {
         price: 0
 
     });
+
+    useEffect(() => {
+        if (!isLoggedIn()) {
+            history.push("/");
+        }
+
+    }, []);
 
     const initialState = {
         title: '',
