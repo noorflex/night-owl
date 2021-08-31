@@ -36,7 +36,7 @@ const BookDetailsPage = () => {
     };
 
     const getBookRating = () => {
-        if (!bookRating || bookRating == null) return "";
+        if (!bookRating || bookRating == null || bookRating[0].numberOfRatings == 0) return "-";
         return (bookRating[0].ratingSum / bookRating[0].numberOfRatings).toFixed(1);
     }
 
