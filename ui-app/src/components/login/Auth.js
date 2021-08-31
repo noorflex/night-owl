@@ -5,7 +5,7 @@ const isLoggedIn = () => {
 
 const setLoggedIn = (token) => {
     if (token === null || token == undefined || token === "") {
-        localStorage.removeItem("username");
+        localStorage.removeItem("user");
     }
     localStorage.setItem("token", token);
 }
