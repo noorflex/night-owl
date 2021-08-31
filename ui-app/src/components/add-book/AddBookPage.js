@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react"
 import "./AddBookPage.css";
-import { BOOK_LIST_API_URL, CATEGORY_API_URL } from "../../constants";
-import { useHistory } from "react-router";
-import { Button, Col, Container, Form, FormLabel, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import CategoryList from "../bootstrap/CategoryList";
 
 const AddBookPage = () => {
-    const history = useHistory();
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const [categories, setCategories] = useState([]);
     const [state, setState] = useState({
         title: '',
         description: '',
@@ -32,17 +29,6 @@ const AddBookPage = () => {
         website: ''
     };
 
-    useEffect(() => {
-        function loadCategories() {
-            fetch(CATEGORY_API_URL).then((categories) => setCategories(categories));
-        }
-
-        loadCategories();
-    }, []);
-    const handleInputChange = (event) => {
-        const value = event.target.value;
-    }
-
     const handleTitle = (event) => {
         setState({ ...state, title: event.target.value });
     }
@@ -52,8 +38,8 @@ const AddBookPage = () => {
     const handleAuthor = (event) => {
         setState({ ...state, author: event.target.value });
     }
-    const handleCategory = (event) => {
-        setState({ ...state, category: event.target.value });
+    const handleCategory = (eventKey) => {
+        setState({ ...state, category: eventKey });
     }
     const handleISBN = (event) => {
         setState({ ...state, isbn: event.target.value });
@@ -76,7 +62,7 @@ const AddBookPage = () => {
     const addBook = (event) => {
         event.preventDefault();
         alert(JSON.stringify(state));
-        setLoading(true);
+        /*setLoading(true);
         fetch(BOOK_LIST_API_URL, {
             method: 'POST',
             headers: {
@@ -89,7 +75,7 @@ const AddBookPage = () => {
         }, (err) => {
             setError(`Failed to add Book,Please try again ${err}`);
             setLoading(false);
-        })
+        })*/
     }
     return <Container className="add-book-form">
         <Row><h3>Add Book</h3></Row>
@@ -112,7 +98,7 @@ const AddBookPage = () => {
                 <Col>
                     <Form.Group className="mb-3" controlId="formGroupCategory">
                         <Form.Label>Category</Form.Label>
-                        <Form.Control type="text" placeholder="Category" onChange={handleCategory} />
+                        <CategoryList onCategorySeleceted={handleCategory} showAll="false" />
                     </Form.Group>
                 </Col>
                 <Col>

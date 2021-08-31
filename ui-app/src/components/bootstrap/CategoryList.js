@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CATEGORY_API_URL } from "../../constants";
-import Dropdown from "react-bootstrap/Dropdown";
 import { useHistory } from "react-router";
+import { Dropdown } from "react-bootstrap";
 
 const CategoryList = (props) => {
     const [categoryList, updateCategory] = useState([]);
@@ -31,10 +31,13 @@ const CategoryList = (props) => {
 
             let categoryResponseJson = await categoryResponse.json();
             console.log('Category Response', categoryResponseJson);
-            const categoryAll = { name: 'All', description: '', categoryId: '0' };
-            categoryResponseJson.push(categoryAll);
+            if (!(props.showAll == "false")) {
+                const categoryAll = { name: 'All', description: '', categoryId: '0' };
+                categoryResponseJson.push(categoryAll);
+            }
             updateCategory(categoryResponseJson);
         }
+
         fetchCategories();
     }, []);
     return <Dropdown onSelect={setCategorySelected}>
