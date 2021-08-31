@@ -373,7 +373,7 @@ body {
   border-radius: 5px;
   font-weight: var(--fw-bold);
   background-color:green;
-  padding: 4px;
+  padding: 4px;  
 }
 .list-book .book-author strong, .list-book .book-rating strong {
   color: var(--color-neutral-90);

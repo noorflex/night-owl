@@ -5,6 +5,7 @@ import { BOOK_LIST_API_URL, RATINGS_API_URL } from "../constants";
 import ReactStars from "react-rating-stars-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { Row, Col } from "react-bootstrap";
 
 const BookDetailsPage = () => {
     const params = useParams();
@@ -106,16 +107,16 @@ const BookDetailsPage = () => {
                                     <div className="label-text">Category</div>
                                     <div className="content  book-category">{book.category}</div>
                                 </div>
-                                <div className="book-detail-row">
-                                    <div className="label-text">Rating</div>
-                                    <div className="row">
-                                        <div className="content book-rating row">
-                                            {getBookRating()}
-                                            <FontAwesomeIcon icon={faStar} size="sm" />
-                                        </div>
-                                        <div className="pt-8">({getNumberOfRatings()} Reviews)</div>
-                                    </div>
-                                </div>
+                                <Row className="book-detail-row">
+                                    <Col className="label-text" lg="2">
+                                        <div>Rating</div>
+                                    </Col>
+                                    <Col className="text-start">
+                                        <Col>
+                                            <span className="book-rating">{getBookRating()}<FontAwesomeIcon icon={faStar} size="sm" /></span>
+                                            ({getNumberOfRatings()} Reviews)</Col>
+                                    </Col>
+                                </Row>
                                 <div className="book-detail-row">
                                     <div className="label-text"> Your Rating</div>
                                     <div className="content">
