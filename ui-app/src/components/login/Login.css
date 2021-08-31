@@ -1,11 +1,7 @@
 .login-form {
     width: 450px;
     height: 400px;
-    display: flex;
     border-radius: 20px;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
     background-color: var(--color-neutral-20);
 }
 
@@ -27,14 +23,6 @@
     height: 40px;
     background-color: var(--color-brand);
     font-size: var(--fs-md);
-}
-
-.form-field {
-    width: 200px;
-    height: 30px;
-    padding: 4px;
-    font-size: var(--fs-md);
-    color: var(--color-neutral-80);
 }
 
 .error {

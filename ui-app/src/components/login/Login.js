@@ -3,6 +3,7 @@ import { LOGIN_URL } from "../../constants";
 import "./Login.css";
 import { setLoggedIn, setLoggedInUser } from "./Auth";
 import { useHistory } from "react-router";
+import { Container, Row, Col, Button, FloatingLabel, Form } from "react-bootstrap";
 
 const Login = ({ setToken }) => {
     const [username, setUsername] = useState("");
@@ -40,25 +41,31 @@ const Login = ({ setToken }) => {
     }
 
     return (
-        <div className="login-form-wrapper">
-            <div className="login-form">
-                <h2>Please Log In</h2>
-                <div className="error">{error}</div>
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        <p>Username</p>
-                        <input type="text" className="form-field" onChange={e => setUsername(e.target.value)} />
-                    </label>
-                    <label>
-                        <p>Password</p>
-                        <input type="password" className="form-field" onChange={e => setPassword(e.target.value)} />
-                    </label>
-                    <div>
-                        <button type="submit">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <Container className="justify-content-md-center login-form  p-8">
+            <Col>
+                <Row><h2>Please Log In</h2></Row>
+                <Row><div className="error">{error}</div></Row>
+                <Row>
+                    <Form onSubmit={handleSubmit}>
+                        <Row className="m-2">
+                            <FloatingLabel controlId="username" label="username">
+                                <Form.Control type="text" placeholder="bob" onChange={e => setUsername(e.target.value)} >
+                                </Form.Control>
+                            </FloatingLabel>
+                        </Row>
+                        <Row className="m-2">
+                            <FloatingLabel controlId="password" label="password">
+                                <Form.Control type="password" placeholder="password" onChange={e => setPassword(e.target.value)} >
+                                </Form.Control>
+                            </FloatingLabel>
+                        </Row>
+                        <Row className="p-4">
+                            <Button variant="primary" type="submit">Login</Button>
+                        </Row>
+                    </Form>
+                </Row>
+            </Col>
+        </Container>
     )
 }
 

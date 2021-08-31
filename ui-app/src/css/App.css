@@ -366,11 +366,6 @@ body {
   color: var(--color-neutral-40);
 }
 
-.row {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-}
 .book-rating {
   color: var(--color-neutral-10);
   margin-top: 8px !important;
