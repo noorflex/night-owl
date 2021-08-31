@@ -2,7 +2,9 @@
     width: 450px;
     height: 400px;
     border-radius: 20px;
-    background-color: var(--color-neutral-20);
+    margin-top: 5rem;
+    padding: 2rem;
+    background-color: var(--color-neutral-10);
 }
 
 .login-form p,h2 {

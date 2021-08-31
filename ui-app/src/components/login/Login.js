@@ -55,7 +55,10 @@ const Login = ({ setToken }) => {
                             <Form.Control type="password" placeholder="password" onChange={e => setPassword(e.target.value)} >
                             </Form.Control>
                         </FloatingLabel>
-                        <Button variant="primary" type="submit">Login</Button>
+                        <Row>
+                            <Col><Button variant="primary" type="submit">Login</Button></Col>
+                            <Col className="mt-4 pt-2"><a href="/books">Explore Books</a></Col>
+                        </Row>
                         <div className="text-secondary mt-2">Please refresh the page after login to Logout option/Username Display</div>
                         <div className="text-secondary">username: bob, alex, noor/ password anything</div>
                     </Form>
