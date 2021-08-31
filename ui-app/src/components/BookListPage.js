@@ -98,7 +98,7 @@ const BookListPage = (props) => {
         };
         fetchData();
     }, [category, title])
-    return <Container>
+    return <Container className="book-list-container">
         <Row className="justify-content-md-center mt-2">
             <Col lg="2">
                 <CategoryList onCategorySeleceted={onCategoryChanged} selected={category} />

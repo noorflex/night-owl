@@ -8,6 +8,7 @@ body {
   padding: 0;
   font-family: 'Inter', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: var(--color-neutral-90);
+  background-color: var(--color-neutral-20) !important;
   font-size: 16px;
 }
 
@@ -24,6 +25,11 @@ body {
 }
 .app-header .logo {
   cursor: pointer;
+}
+
+.book-list-container {
+  padding-top: 1rem;
+  background-color: var(--color-neutral-10) !important;
 }
 
 .header-title, .book-search-title {
@@ -93,7 +99,8 @@ body {
   width:90%;
   flex-direction: column;
   grid-gap: 1rem;
-  padding: 2rem;  
+  padding: 2rem;
+  background-color: var(--color-neutral-10);  
 }
 
 .list-view-book h2 {
@@ -280,9 +287,11 @@ body {
   font-size: var(--fs-rg);
   color: var(--color-neutral-100);
 }
-
+.fast-transition {
+  background-color: var(--color-neutral-10);
+}
 .fast-transition:hover {
-  transform: scale(1.00);
+  transform: scale(1.05);
   box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 /* outer div of book detail */
