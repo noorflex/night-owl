@@ -58,7 +58,6 @@ const createBook = (request, response) => {
         ]
     }, (error, res) => {
         if (error) {
-            console.log(error);
             response.status(500).json(error);
         }
         response.status(res.statusCode).json(res.body);
@@ -94,7 +93,6 @@ const getBooksByTitle = (request, response) => {
 
 const getBooksRating = (request, response) => {
     const bookIds = request.body.bookIds;
-    console.log('BookIds for getting rating', bookIds.join());
     const query = "select book_id, sum(rating) ratingSum, count(rating) numberOfRatings from books.ratings where book_id in " +
         "(" + bookIds.map(bookId => "'" + bookId + "'").join() + ") group by book_id";
     db.query(query, (err, res) => {

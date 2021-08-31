@@ -21,13 +21,11 @@ const BookListPage = (props) => {
     const [title, setTitle] = useState([]);
     const onChangeTextToSearch = (bookTitle) => {
         setTitleChanged(true);
-        console.log("Title changed:" + bookTitle);
         setTitle(bookTitle);
     }
 
     const onCategoryChanged = (bookCategory) => {
         setCategoryChanged(true);
-        console.log("Category changed:" + bookCategory);
         setCategory(bookCategory);
     }
 
@@ -36,12 +34,9 @@ const BookListPage = (props) => {
         const bookRatingForCurrentBook = booksRating.filter(
             currentBookRating => currentBookRating.book_id === bookId);
         if (!bookRatingForCurrentBook || bookRatingForCurrentBook.length == 0) return 0;
-        console.log('filter applied BookId:' + bookId);
-        console.log('After filtering:', bookRatingForCurrentBook);
         const sumOfAllRatings = bookRatingForCurrentBook[0].ratingSum;
         const numberOfRating = bookRatingForCurrentBook[0].numberOfRatings;
         const rating = (sumOfAllRatings / numberOfRating).toFixed(1);
-        console.log(`rating for bookid ${bookId} is ${rating}`);
         return rating;
     }
 
@@ -53,14 +48,12 @@ const BookListPage = (props) => {
     }
 
     useEffect(() => {
-        console.log('Use effect BookListPage');
         // Make api call and store values
         async function fetchData() {
             setLoading(true);
             let bookListResponse;
             if (categoryChanged) {
                 setCategoryChanged(false);
-                console.log('Fetch book by category');
                 if (category != "All") {
                     bookListResponse = await fetch(BOOK_LIST_API_URL + "/category/" + category);
                 } else {
@@ -68,7 +61,6 @@ const BookListPage = (props) => {
                 }
             } else if (titleChanged) {
                 setTitleChanged(false);
-                console.log('Fetch book by title');
                 if (title != '') {
                     bookListResponse = await fetch(BOOK_LIST_API_URL + "/title/" + title);
                 } else {
@@ -78,7 +70,6 @@ const BookListPage = (props) => {
             } else {
                 bookListResponse = await fetch(BOOK_LIST_API_URL);
             }
-            console.log('Booklist Response', bookListResponse);
             const bookListJsonData = await bookListResponse.json();
             const bookIds = bookListJsonData.map(bookDetail => bookDetail.id);
             const booksRatingResponse = await fetch(BOOK_LIST_API_URL + "/ratings", {
@@ -89,8 +80,6 @@ const BookListPage = (props) => {
                 body: JSON.stringify({ "bookIds": bookIds })
             });
             const booksRatingJson = await booksRatingResponse.json();
-
-            console.log('books rating', booksRatingJson);
 
             updateBooksRating(booksRatingJson);
             updateBookList(bookListJsonData);

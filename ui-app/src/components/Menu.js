@@ -6,14 +6,12 @@ import { useHistory } from 'react-router';
 const Menu = (props) => {
     const [categoryList, updateCategory] = useState([]);
     const [hideMenu, updateHideMenu] = useState(true);
-    console.log('Menu received props:' + props.items);
 
     const history = useHistory();
     const handleMenuClick = (event) => {
         event.preventDefault();
         event.stopPropagation();
         var shouldHide = (hideMenu === true) ? false : true;
-        console.log('clicked menu: hideMenu=' + shouldHide);
         updateHideMenu(shouldHide);
     };
 
@@ -21,16 +19,13 @@ const Menu = (props) => {
         const categoryId = event.target.dataset.id;
         props.onChange(categoryId);
         updateHideMenu(true);
-        console.log('CategoryId', categoryId);
     };
 
     useEffect(() => {
-        console.log('Use Effect running Menu');
         async function fetchCategories() {
             const categoryResponse = await fetch(CATEGORY_API_URL);
 
             const categoryResponseJson = await categoryResponse.json();
-            console.log('Category Response', categoryResponseJson);
             const categoryAll = { name: 'All', description: '' };
             categoryResponseJson.push(categoryResponseJson);
             updateCategory(categoryResponseJson);
@@ -43,7 +38,6 @@ const Menu = (props) => {
         <ul className="menu-items" hidden={hideMenu}>
             {
                 categoryList.map(category => {
-                    console.log(category);
                     return <li className="menu-item" onClick={filterByCategory} data-id={category.name}>{category.name}</li>
                 })
             }

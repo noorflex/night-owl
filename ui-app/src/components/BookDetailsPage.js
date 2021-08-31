@@ -68,7 +68,6 @@ const BookDetailsPage = () => {
             const ratingUrl = RATINGS_API_URL + "/book/" + bookId + "/user/" + getLoggedUserId();
             const ratingResponse = await fetch(ratingUrl);
             const ratingResponseJson = await ratingResponse.json();
-            console.log('My Rating:' + ratingResponseJson);
             if (ratingResponseJson != null && ratingResponseJson.length != 0) {
                 setMyRating(ratingResponseJson[0]);
             }

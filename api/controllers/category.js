@@ -5,7 +5,6 @@ const createCategory = (request, response) => {
 };
 const getAllCategory = (request, response) => {
     db.query('select * from books.category', (error, res) => {
-        console.log('category response', res);
         if (error) response.status(500).json(error);
         response.status(200).json(res.data);
     });

@@ -7,14 +7,12 @@ const CategoryList = (props) => {
     const [categoryList, updateCategory] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(props.selected);
     const [hideMenu, updateHideMenu] = useState(true);
-    console.log('Menu received props:' + props.items);
 
     const history = useHistory();
     const handleMenuClick = (event) => {
         event.preventDefault();
         event.stopPropagation();
         var shouldHide = (hideMenu === true) ? false : true;
-        console.log('clicked menu: hideMenu=' + shouldHide);
         updateHideMenu(shouldHide);
     };
 
@@ -25,12 +23,10 @@ const CategoryList = (props) => {
     };
 
     useEffect(() => {
-        console.log('Use Effect running Menu');
         async function fetchCategories() {
             const categoryResponse = await fetch(CATEGORY_API_URL);
 
             let categoryResponseJson = await categoryResponse.json();
-            console.log('Category Response', categoryResponseJson);
             if (!(props.showAll == "false")) {
                 const categoryAll = { name: 'All', description: '', categoryId: '0' };
                 categoryResponseJson.push(categoryAll);

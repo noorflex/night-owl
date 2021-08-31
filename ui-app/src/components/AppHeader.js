@@ -10,7 +10,6 @@ const AppHeader = () => {
     const [loggedIn, setLoggedInStatus] = useState();
     useEffect(() => {
         let loggedInStatus = isLoggedIn();
-        console.log('useEffect AppHeader: Loggedin=' + loggedInStatus);
         setLoggedInStatus(loggedInStatus);
     }, []);
     return <Container fluid>

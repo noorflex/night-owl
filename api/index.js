@@ -18,5 +18,4 @@ app.use(express.json());
 const routes = require('./routes/index');
 app.use('/', routes);
 app.listen(PORT, () => {
-    console.log(`App is listening at http://localhost:${PORT}`);
 });

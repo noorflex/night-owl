@@ -17,7 +17,7 @@ const BookSearchControl = (props) => {
                                 aria-describedby="search-icon"
                                 onChange={event => setTextToSearch(event.target.value)
                                 }
-                                onKeyPress={(event) => { if (event.key == "Enter") { props.onClick(textToSearch) } console.log(event.key); }}
+                                onKeyPress={(event) => { if (event.key == "Enter") { props.onClick(textToSearch) }; }}
                             />
                             <InputGroup.Text id="search-icon" onClick={event => props.onClick(textToSearch)}>
                                 <FontAwesomeIcon icon={faSearch} />

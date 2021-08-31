@@ -4,7 +4,6 @@ const getRating = (request, response) => {
     const ratingId = request.params['ratingId'];
     let query = "";
     if (ratingId) {
-        console.log('querying rating with rating_id' + ratingId);
         query = 'select * from books.ratings rating where rating.rating_id=\'' + ratingId + '\'';
     } else {
         const bookId = request.params['bookId'];
@@ -12,7 +11,6 @@ const getRating = (request, response) => {
         query = 'select * from books.ratings rating where rating.book_id=\'' + bookId + '\' and rating.user_id=\'' + userId + '\'';
 
     }
-    console.log(`rating query: ${query}`);
     db.query(query, (err, res) => {
         if (err) {
             response.status(500).json(err);
@@ -35,8 +33,6 @@ const createRating = (request, response) => {
             }
         ]
     }, (err, res) => {
-        console.log(`error: ${err}`);
-        console.log(`res: ${res}`);
         if (err) {
             response.status(500).json(err);
         }
