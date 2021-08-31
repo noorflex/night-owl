@@ -21,13 +21,13 @@ const AppHeader = () => {
                     <a className="header-title">Night Owl</a>
                 </div></Col>
             <Col>
-                {loggedIn &&
+                {
                     <Row className="login-section">
                         <Col lg="5">
                             <a href="#" onClick={(event) => { history.push("/books/add"); }}>Add Book</a>
                         </Col>
                         <Col lg="7">
-                            {isLoggedIn &&
+                            {isLoggedIn() &&
                                 <div>
                                     <label>Welcome {getLoggedUserName()}</label>
                                     <a href="#" onClick={(event) => { setLoggedIn(""); history.push("/"); }}>(Logout)</a>
