@@ -45,7 +45,7 @@ const Login = ({ setToken }) => {
             {isLoggedIn() ? <div>
                 <div>You are logged in as {getLoggedUserName()}</div>
                 <div><a href="#" onClick={(event) => setLoggedIn("")}>Click Here</a> to Logout out</div>
-                <div><a href="/books">Explore Books</a></div>
+                <div><a href="#" onClick={(event) => history.push("/books")}>Explore Books</a></div>
             </div> :
                 <Col>
                     <Row><h2>Please Log In</h2></Row>
@@ -62,7 +62,7 @@ const Login = ({ setToken }) => {
                             </FloatingLabel>
                             <Row>
                                 <Col><Button variant="primary" type="submit">Login</Button></Col>
-                                <Col className="mt-4 pt-2"><a href="/books">Explore Books</a></Col>
+                                <Col className="mt-4 pt-2"><a href="#" onClick={(event) => history.push("/books")}>Explore Books</a></Col>
                             </Row>
                             <div className="text-secondary mt-2">Please refresh the page after login to Logout option/Username Display</div>
                             <div className="text-secondary">username: bob, alex, noor/ password anything</div>
