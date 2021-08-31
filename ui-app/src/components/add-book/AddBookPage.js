@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import "./AddBookPage.css";
 import { BOOK_LIST_API_URL, CATEGORY_API_URL } from "../../constants";
 import { useHistory } from "react-router";
+import { Button, Col, Container, Form, FormLabel, Row } from "react-bootstrap";
 
 const AddBookPage = () => {
     const history = useHistory();
@@ -90,33 +91,68 @@ const AddBookPage = () => {
             setLoading(false);
         })
     }
-    return <div className="add-book-wrapper">
-        <form id="addBookForm" onSubmit={addBook}>
-            <h3>Add Book</h3>
-            {error != "" && <div className="error">{error}</div>}
-            {message != "" && <div>{message}</div>}
-            <div className="add-book-form">
-                <a onClick={(event) => { document.getElementById("addBookForm").reset(); }} href="#">Clear</a>
-                <input className="input" id="title" type="text" placeholder="Title" onChange={handleTitle} />
-                <textarea className="input" id="description" placeholder="Description" onChange={handleDescription} />
-                <div className="row">
-                    <input className="input" id="author" type="text" placeholder="Author" onChange={handleAuthor}></input>
-                    <input className="input" id="category" type="text" placeholder="Category" onChange={handleCategory}></input>
-                </div>
-                <input className="input" id="isbn" type="text" placeholder="ISBN" onChange={handleISBN}></input>
-                <input className="input" id="cover" type="text" placeholder="URL of the cover image" onChange={handleCoverImageUrl}></input>
-                <input className="input" id="cover" type="text" placeholder="Website Url" onChange={handleWebsiteUrl}></input>
-                <div>
-                    <input className="input" id="pages" type="number" min="1" max="5000" placeholder="Pages" onChange={handlePages}></input>
-                    <input className="input" id="price" type="number" min="1" max="50000" placeholder="Price" onChange={handlePrice}></input>
-                </div>
-                <div>
-                    <input type="submit" id="addBookButton" value={loading ? "Adding Book..." : "Add Book"} disabled={loading} />
-                    <input type="button" id="cancelButton" value="Cancel" onClick={(event) => { history.push("/books") }} />
-                </div>
-            </div>
-        </form>
-    </div >
+    return <Container className="add-book-form">
+        <Row><h3>Add Book</h3></Row>
+        <Form onSubmit={addBook}>
+            <Form.Group className="mb-3" controlId="formGroupTitle">
+                < Form.Label > Book Title</Form.Label >
+                <Form.Control type="text" placeholder="Enter Title of the book" onChange={handleTitle} />
+            </Form.Group >
+            <Form.Group className="mb-3" controlId="formGroupDescription">
+                <Form.Label>Description</Form.Label>
+                <Form.Control as="textarea" rows={5} placeholder="Description" onChange={handleDescription} />
+            </Form.Group>
+            <Row lg="2">
+                <Form.Group className="mb-3" controlId="formGroupAuthor">
+                    <Form.Label>Author</Form.Label>
+                    <Form.Control type="text" placeholder="Author" onChange={handleAuthor} />
+                </Form.Group>
+            </Row>
+            <Row>
+                <Col>
+                    <Form.Group className="mb-3" controlId="formGroupCategory">
+                        <Form.Label>Category</Form.Label>
+                        <Form.Control type="text" placeholder="Category" onChange={handleCategory} />
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Group className="mb-3" controlId="formGroupISBN">
+                        <Form.Label>ISBN</Form.Label>
+                        <Form.Control type="text" placeholder="ISBN" onChange={handleISBN} />
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Form.Group className="mb-3" controlId="formGroupURL">
+                <Form.Label>Image Url</Form.Label>
+                <Form.Control type="text" placeholder="e.g http://www.image.com/image1.png" onChange={handleCoverImageUrl} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGroupWebsiteUrl">
+                <Form.Label>Website</Form.Label>
+                <Form.Control type="text" placeholder="e.g http://mybook.com/book1.html" onChange={handleWebsiteUrl} />
+            </Form.Group>
+            <Row>
+                <Col>
+                    <Form.Group className="mb-3" controlId="formGroupPages">
+                        <Form.Label>Pages</Form.Label>
+                        <Form.Control type="number" placeholder="e.g 120" onChange={handlePages} />
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Group className="mb-3" controlId="formGroupPrice">
+                        <Form.Label>Price (INR)</Form.Label>
+                        <Form.Control type="number" placeholder="e.g 450" onChange={handlePrice} />
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Button variant="primary" type="submit" size="lg">
+                {loading ? "Adding please wait" : "Add Book"}
+            </Button>
+            <Button variant="secondary" type="reset" onClick={(event) => { setState(initialState); setMessage(""); }} className="m-2" size="lg">
+                Reset
+            </Button>
+        </Form >
+        <Row><div class="text-success">{message}</div></Row>
+    </Container >
 }
 
 export default AddBookPage;
