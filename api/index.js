@@ -17,5 +17,5 @@ app.use(express.json());
 // Define Routes
 const routes = require('./routes/index');
 app.use('/', routes);
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
 });
